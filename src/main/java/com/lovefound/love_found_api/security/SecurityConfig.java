@@ -37,28 +37,28 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
 
                 // ---------- Public ----------
-                .requestMatchers("api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
 
-                .requestMatchers(HttpMethod.GET, "api/pets/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "api/kind-map/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/pets/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/kind-map/**").permitAll()
 
                 // ---------- Shelter ----------
-                .requestMatchers(HttpMethod.POST, "api/pets/**").hasRole("SHELTER")
-                .requestMatchers(HttpMethod.PUT, "api/pets/**").hasRole("SHELTER")
-                .requestMatchers(HttpMethod.DELETE, "api/pets/**").hasRole("SHELTER")
+                .requestMatchers(HttpMethod.POST, "/api/pets/**").hasRole("SHELTER")
+                .requestMatchers(HttpMethod.PUT, "/api/pets/**").hasRole("SHELTER")
+                .requestMatchers(HttpMethod.DELETE, "/api/pets/**").hasRole("SHELTER")
 
-                .requestMatchers("api/applications/shelter/**")
+                .requestMatchers("/api/applications/shelter/**")
                 .hasRole("SHELTER")
 
                 // ---------- Adopter ----------
-                .requestMatchers(HttpMethod.POST, "api/applications/**")
+                .requestMatchers(HttpMethod.POST, "/api/applications/**")
                 .hasRole("ADOPTER")
 
-                .requestMatchers("api/applications/my-applications")
+                .requestMatchers("/api/applications/my-applications")
                 .hasRole("ADOPTER")
 
                 // ---------- Admin ----------
-                .requestMatchers("api/admin/**")
+                .requestMatchers("/api/admin/**")
                 .hasRole("ADMIN")
 
                 // Everything else requires authentication

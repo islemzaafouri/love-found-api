@@ -1,13 +1,17 @@
 
 package com.lovefound.love_found_api.security;
 
+import java.util.ArrayList;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.lovefound.love_found_api.DAO.entities.User;
 import com.lovefound.love_found_api.DAO.repos.UserRepo;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepo userRepo;
 
