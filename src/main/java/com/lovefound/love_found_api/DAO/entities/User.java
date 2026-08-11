@@ -2,7 +2,7 @@ package com.lovefound.love_found_api.DAO.entities;
 
 import java.time.LocalDateTime;
 
-import com.lovefound.love_found_api.DAO.models.Role;
+import com.lovefound.love_found_api.DAO.models.enums.user.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

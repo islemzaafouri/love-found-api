@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.lovefound.love_found_api.exceptions.AlreadyExistsException;
+import com.lovefound.love_found_api.exceptions.ResourceNotFoundException;
 import com.lovefound.love_found_api.DTO.Exceptions.ErrorResponse;
 
 
@@ -39,7 +40,6 @@ public class GlobaExceptionHandler {
     public ResponseEntity<Map<String, String>> handleValidationErrors(
             MethodArgumentNotValidException ex) {
 
-                System.out.println("🔥 VALIDATION EXCEPTION CAUGHT");
         Map<String, String> errors = new HashMap<>();
 
         ex.getBindingResult()
@@ -56,4 +56,10 @@ public class GlobaExceptionHandler {
                 .body(errors);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
+    return ResponseEntity
+        .status(HttpStatus.UNAUTHORIZED)
+        .body(new ErrorResponse(401, "Invalid email or password"));
+}
 }

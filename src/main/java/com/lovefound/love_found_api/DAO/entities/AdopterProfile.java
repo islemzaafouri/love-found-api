@@ -1,10 +1,10 @@
 package com.lovefound.love_found_api.DAO.entities;
 
-import com.lovefound.love_found_api.DAO.models.enums.ExperienceLevel;
-import com.lovefound.love_found_api.DAO.models.enums.HomeType;  
-import com.lovefound.love_found_api.DAO.models.enums.LifeStyleActivity;
-import com.lovefound.love_found_api.DAO.models.enums.PreferredSpecies;
-import com.lovefound.love_found_api.DAO.models.enums.WorkSchedule;
+import com.lovefound.love_found_api.DAO.models.enums.user.ExperienceLevel;
+import com.lovefound.love_found_api.DAO.models.enums.user.HomeType;
+import com.lovefound.love_found_api.DAO.models.enums.user.LifeStyleActivity;
+import com.lovefound.love_found_api.DAO.models.enums.user.PreferredSpecies;
+import com.lovefound.love_found_api.DAO.models.enums.user.WorkSchedule;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

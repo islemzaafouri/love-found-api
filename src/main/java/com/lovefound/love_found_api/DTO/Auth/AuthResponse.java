@@ -1,6 +1,6 @@
 package com.lovefound.love_found_api.DTO.Auth;
 
-import com.lovefound.love_found_api.DAO.models.Role;
+import com.lovefound.love_found_api.DAO.models.enums.user.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lovefound.love_found_api.DAO.entities.AdopterProfile;
 import com.lovefound.love_found_api.DAO.entities.ShelterProfile;
 import com.lovefound.love_found_api.DAO.entities.User;
-import com.lovefound.love_found_api.DAO.models.Role;
+import com.lovefound.love_found_api.DAO.models.enums.user.Role;
 import com.lovefound.love_found_api.DAO.repos.UserRepo;
 import com.lovefound.love_found_api.DTO.Auth.AuthResponse;
 import com.lovefound.love_found_api.DTO.Auth.LoginRequest;
@@ -37,9 +37,7 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     @Override
     public String registerAdopter(RegisterAdopterRequest request) {
-        System.out.println("🔥 REGISTER SERVICE REACHED");
         if (userRepo.findByEmail(request.getEmail()) != null) {
-            System.out.println("🔥 EMAIL ALREADY EXISTS");
             throw new AlreadyExistsException("Email already exists");
         }
         // Create a new user entity and set its properties
@@ -87,16 +85,18 @@ public class AuthServiceImpl implements AuthService {
     } 
 
     @Override
+    @Transactional
     public AuthResponse login (LoginRequest request){
+        User user = userRepo.findByEmail(request.getEmail());
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found");
+        }
+
         authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
         request.getEmail(),
         request.getPassword()));
     
-        User user = userRepo.findByEmail(request.getEmail());
-        if (user == null) {
-            throw new ResourceNotFoundException("User not found");
-        }
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
         return new AuthResponse(token, user.getEmail(), user.getRole());
 
