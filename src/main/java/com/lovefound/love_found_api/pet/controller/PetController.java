@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
 import com.lovefound.love_found_api.auth.repository.ShelterProfileRepo;
 import com.lovefound.love_found_api.core.exceptions.ResourceNotFoundException;
+import com.lovefound.love_found_api.core.exceptions.UnauthorizedException;
 import com.lovefound.love_found_api.pet.PetMapper;
 import com.lovefound.love_found_api.pet.dto.PetRequest;
 import com.lovefound.love_found_api.pet.dto.PetResponse;
@@ -28,6 +30,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/pets")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PetController {
     private final PetService petService;
     private final PetMapper petMapper;
@@ -73,6 +76,23 @@ public class PetController {
         List<Pet> pets = petService.getAllPets();
         return ResponseEntity.ok(petMapper.toResponseList(pets));
     }
+
+    //get pet details for update
+    @GetMapping("/{id}/edit")
+    public ResponseEntity<PetResponse> getPetForEdit(
+        @PathVariable Long id, 
+        Authentication authentication) {
+
+    Long shelterId = extractShelterId(authentication);
+    
+    // Check ownership during GET!
+    Pet pet = petService.getPetById(id);
+    if (!pet.getShelter().getId().equals(shelterId)) {
+        throw new UnauthorizedException("Unauthorized: Shelter does not own this pet");
+    }
+
+    return ResponseEntity.ok(petMapper.toResponse(pet));
+}
 
     // ---------- Shelter-only writes ----------
     @PostMapping

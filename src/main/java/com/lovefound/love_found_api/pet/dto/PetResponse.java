@@ -23,7 +23,7 @@ public class PetResponse {
     private Integer age;
     private PetGender gender;
     private String breed;
-    private String photourl;
+    private String photoUrl;
     private Set<PersonalityTrait> personalityTraits;
     private String description;
     private String rescueStory;

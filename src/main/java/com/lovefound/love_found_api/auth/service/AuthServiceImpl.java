@@ -96,9 +96,18 @@ public class AuthServiceImpl implements AuthService {
         new UsernamePasswordAuthenticationToken(
         request.getEmail(),
         request.getPassword()));
+
+        Long profileId = null;
+
+        if (user.getRole() == Role.SHELTER) {
+            profileId = user.getShelterProfile().getId();
+
+        } else if (user.getRole() == Role.ADOPTER) {
+            profileId = user.getAdopterProfile().getId();
+        }
     
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
-        return new AuthResponse(token, user.getEmail(), user.getRole());
+        return new AuthResponse(token, user.getEmail(), user.getRole(),profileId);
 
     }
 

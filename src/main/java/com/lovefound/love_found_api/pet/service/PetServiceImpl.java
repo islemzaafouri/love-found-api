@@ -31,7 +31,7 @@ public class PetServiceImpl implements PetService {
         pet.setAge(petDTO.getAge());
         pet.setGender(petDTO.getGender());
         pet.setBreed(petDTO.getBreed());
-        pet.setPhotourl(petDTO.getPhotourl());
+        pet.setPhotoUrl(petDTO.getPhotoUrl());
         pet.setPersonalityTraits(petDTO.getPersonalityTraits());
         pet.setDescription(petDTO.getDescription());
         pet.setRescueStory(petDTO.getRescueStory());
@@ -62,7 +62,7 @@ public class PetServiceImpl implements PetService {
         pet.setAge(updatedPet.getAge());
         pet.setGender(updatedPet.getGender());
         pet.setBreed(updatedPet.getBreed());
-        pet.setPhotourl(updatedPet.getPhotourl());
+        pet.setPhotoUrl(updatedPet.getPhotoUrl());
         pet.setPersonalityTraits(updatedPet.getPersonalityTraits());
         pet.setDescription(updatedPet.getDescription());
         pet.setRescueStory(updatedPet.getRescueStory());

@@ -46,7 +46,7 @@ public class PetRequest {
         regexp = "^(https?://.*)?$", 
         message = "Photo URL must be a valid http or https URL"
     )
-    private String photourl;
+    private String photoUrl;
 
     @NotEmpty(message = "At least one personality trait is required")
     private Set<PersonalityTrait> personalityTraits;

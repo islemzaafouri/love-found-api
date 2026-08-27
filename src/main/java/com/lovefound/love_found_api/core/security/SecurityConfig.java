@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 public class SecurityConfig {
@@ -26,6 +28,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+            // 1. Enable CORS using your CorsConfig bean settings
+            .cors(Customizer.withDefaults())
+            
             // Disable CSRF because we use JWT
             .csrf(AbstractHttpConfigurer::disable)
 
@@ -35,6 +40,9 @@ public class SecurityConfig {
 
             // Authorization Rules
             .authorizeHttpRequests(auth -> auth
+
+                // 2. Allow ALL browser CORS preflight checks automatically
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
                 // ---------- Public ----------
                 .requestMatchers("/api/auth/**").permitAll()
@@ -47,6 +55,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/pets/**").hasRole("SHELTER")
                 .requestMatchers(HttpMethod.PUT, "/api/pets/**").hasRole("SHELTER")
                 .requestMatchers(HttpMethod.DELETE, "/api/pets/**").hasRole("SHELTER")
+                .requestMatchers("/api/profile/shelter/**").hasRole("SHELTER")
 
                 .requestMatchers("/api/applications/shelter/**")
                 .hasRole("SHELTER")
@@ -54,6 +63,9 @@ public class SecurityConfig {
                 // ---------- Adopter ----------
                 .requestMatchers(HttpMethod.POST, "/api/applications/**")
                 .hasRole("ADOPTER")
+
+                .requestMatchers("/api/profile/adopter/**").hasRole("ADOPTER")
+
 
                 .requestMatchers("/api/applications/my-applications")
                 .hasRole("ADOPTER")

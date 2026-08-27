@@ -26,7 +26,7 @@ public class PetMapper {
         response.setAge(pet.getAge());
         response.setGender(pet.getGender());
         response.setBreed(pet.getBreed());
-        response.setPhotourl(pet.getPhotourl());
+        response.setPhotoUrl(pet.getPhotoUrl());
         response.setPersonalityTraits(pet.getPersonalityTraits());
         response.setDescription(pet.getDescription());
         response.setRescueStory(pet.getRescueStory());

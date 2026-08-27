@@ -71,14 +71,14 @@ public class GlobaExceptionHandler {
         public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
-                .body(new ErrorResponse(401, "Invalid email or password"));
+                .body(new ErrorResponse(401,ex.getMessage()));
         }
 
         @ExceptionHandler(UnauthorizedException.class)
-        public ResponseEntity<Map<String, String>> handleUnauthorizedException(UnauthorizedException ex) {
+        public ResponseEntity<ErrorResponse> handleUnauthorized(UnauthorizedException ex) {
         return ResponseEntity
             .status(HttpStatus.FORBIDDEN) 
-            .body(Map.of("error", ex.getMessage()));
-        }
+            .body(new ErrorResponse(403, ex.getMessage()));
+}
 
 }
