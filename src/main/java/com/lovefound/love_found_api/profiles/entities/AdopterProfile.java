@@ -1,10 +1,11 @@
-package com.lovefound.love_found_api.auth.model.entities;
+package com.lovefound.love_found_api.profiles.entities;
 
-import com.lovefound.love_found_api.auth.model.enums.ExperienceLevel;
-import com.lovefound.love_found_api.auth.model.enums.HomeType;
-import com.lovefound.love_found_api.auth.model.enums.LifeStyleActivity;
-import com.lovefound.love_found_api.auth.model.enums.PreferredSpecies;
-import com.lovefound.love_found_api.auth.model.enums.WorkSchedule;
+import com.lovefound.love_found_api.auth.model.entities.User;
+import com.lovefound.love_found_api.profiles.enums.ExperienceLevel;
+import com.lovefound.love_found_api.profiles.enums.HomeType;
+import com.lovefound.love_found_api.profiles.enums.LifeStyleActivity;
+import com.lovefound.love_found_api.profiles.enums.PreferredSpecies;
+import com.lovefound.love_found_api.profiles.enums.WorkSchedule;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

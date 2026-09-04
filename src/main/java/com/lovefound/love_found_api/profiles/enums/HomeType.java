@@ -1,4 +1,4 @@
-package com.lovefound.love_found_api.auth.model.enums;
+package com.lovefound.love_found_api.profiles.enums;
 
 public enum HomeType {
     APARTMENT,

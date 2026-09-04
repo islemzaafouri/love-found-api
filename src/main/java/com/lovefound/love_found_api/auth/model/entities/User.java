@@ -3,6 +3,8 @@ package com.lovefound.love_found_api.auth.model.entities;
 import java.time.LocalDateTime;
 
 import com.lovefound.love_found_api.auth.model.enums.Role;
+import com.lovefound.love_found_api.profiles.entities.AdopterProfile;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

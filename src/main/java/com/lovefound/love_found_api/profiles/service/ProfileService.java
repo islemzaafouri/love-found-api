@@ -2,12 +2,12 @@ package com.lovefound.love_found_api.profiles.service;
 
 import org.springframework.security.core.Authentication;
 
-import com.lovefound.love_found_api.auth.model.entities.AdopterProfile;
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
 import com.lovefound.love_found_api.profiles.dto.AdopterProfileRequest;
 import com.lovefound.love_found_api.profiles.dto.AdopterProfileResponse;
 import com.lovefound.love_found_api.profiles.dto.ShelterProfileRequest;
 import com.lovefound.love_found_api.profiles.dto.ShelterProfileResponse;
+import com.lovefound.love_found_api.profiles.entities.AdopterProfile;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 public interface ProfileService {
     AdopterProfileResponse getMyAdopterProfile(Authentication authentication);

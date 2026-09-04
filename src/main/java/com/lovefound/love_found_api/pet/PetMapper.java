@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
 import com.lovefound.love_found_api.pet.dto.PetResponse;
 import com.lovefound.love_found_api.pet.dto.ShelterSummary;
 import com.lovefound.love_found_api.pet.model.entity.Pet;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 @Component
 public class PetMapper {

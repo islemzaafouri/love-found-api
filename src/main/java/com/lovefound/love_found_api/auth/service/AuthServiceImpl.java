@@ -10,14 +10,14 @@ import com.lovefound.love_found_api.auth.dto.AuthResponse;
 import com.lovefound.love_found_api.auth.dto.LoginRequest;
 import com.lovefound.love_found_api.auth.dto.RegisterAdopterRequest;
 import com.lovefound.love_found_api.auth.dto.RegisterShelterRequest;
-import com.lovefound.love_found_api.auth.model.entities.AdopterProfile;
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
 import com.lovefound.love_found_api.auth.model.entities.User;
 import com.lovefound.love_found_api.auth.model.enums.Role;
 import com.lovefound.love_found_api.auth.repository.UserRepo;
 import com.lovefound.love_found_api.core.exceptions.AlreadyExistsException;
 import com.lovefound.love_found_api.core.exceptions.ResourceNotFoundException;
 import com.lovefound.love_found_api.core.security.JwtUtil;
+import com.lovefound.love_found_api.profiles.entities.AdopterProfile;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 
 @Service

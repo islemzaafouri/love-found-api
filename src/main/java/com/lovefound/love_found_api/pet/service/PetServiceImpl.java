@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 
 import com.lovefound.love_found_api.pet.model.enums.PetSpecies;
 import com.lovefound.love_found_api.pet.model.enums.PetStatus;
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
-import com.lovefound.love_found_api.auth.repository.ShelterProfileRepo;
 import com.lovefound.love_found_api.core.exceptions.ResourceNotFoundException;
 import com.lovefound.love_found_api.core.exceptions.UnauthorizedException;
 import com.lovefound.love_found_api.pet.dto.PetRequest;
 import com.lovefound.love_found_api.pet.model.entity.Pet;
 import com.lovefound.love_found_api.pet.repository.PetRepo;
+import com.lovefound.love_found_api.profiles.Repos.ShelterProfileRepo;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 @Service
 public class PetServiceImpl implements PetService {

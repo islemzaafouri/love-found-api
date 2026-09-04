@@ -1,4 +1,6 @@
-package com.lovefound.love_found_api.auth.model.entities;
+package com.lovefound.love_found_api.profiles.entities;
+
+import com.lovefound.love_found_api.auth.model.entities.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +34,9 @@ public class ShelterProfile {
     private String address;
 
     private String city;
+
+    //@Column(name="contact_email",nullable = false)
+    //private String contactEmail;
 
     @Column(length = 1000)
     private String description;

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
-import com.lovefound.love_found_api.auth.repository.ShelterProfileRepo;
 import com.lovefound.love_found_api.core.exceptions.ResourceNotFoundException;
 import com.lovefound.love_found_api.core.exceptions.UnauthorizedException;
 import com.lovefound.love_found_api.pet.PetMapper;
@@ -25,6 +23,8 @@ import com.lovefound.love_found_api.pet.dto.PetResponse;
 import com.lovefound.love_found_api.pet.model.entity.Pet;
 import com.lovefound.love_found_api.pet.model.enums.PetSpecies;
 import com.lovefound.love_found_api.pet.service.PetService;
+import com.lovefound.love_found_api.profiles.Repos.ShelterProfileRepo;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 import jakarta.validation.Valid;
 

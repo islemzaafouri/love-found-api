@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
 import com.lovefound.love_found_api.pet.model.enums.PersonalityTrait;
 import com.lovefound.love_found_api.pet.model.enums.PetGender;
 import com.lovefound.love_found_api.pet.model.enums.PetSpecies;
 import com.lovefound.love_found_api.pet.model.enums.PetStatus;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;

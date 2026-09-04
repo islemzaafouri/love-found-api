@@ -1,20 +1,21 @@
 package com.lovefound.love_found_api.profiles.service;
 
 import com.lovefound.love_found_api.profiles.ProfileMapper;
+import com.lovefound.love_found_api.profiles.Repos.AdopterProfileRepo;
+import com.lovefound.love_found_api.profiles.Repos.ShelterProfileRepo;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.lovefound.love_found_api.auth.model.entities.AdopterProfile;
-import com.lovefound.love_found_api.auth.model.entities.ShelterProfile;
 import com.lovefound.love_found_api.auth.model.entities.User;
-import com.lovefound.love_found_api.auth.repository.AdopterProfileRepo;
-import com.lovefound.love_found_api.auth.repository.ShelterProfileRepo;
 import com.lovefound.love_found_api.auth.repository.UserRepo;
 import com.lovefound.love_found_api.core.exceptions.ResourceNotFoundException;
 import com.lovefound.love_found_api.profiles.dto.AdopterProfileRequest;
 import com.lovefound.love_found_api.profiles.dto.AdopterProfileResponse;
 import com.lovefound.love_found_api.profiles.dto.ShelterProfileRequest;
 import com.lovefound.love_found_api.profiles.dto.ShelterProfileResponse;
+import com.lovefound.love_found_api.profiles.entities.AdopterProfile;
+import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -39,19 +40,19 @@ public class ProfileServiceImpl implements ProfileService {
         User user=getAuthenticatedUser(authentication);
         AdopterProfile profile =
                 adopterProfileRepository
-                        .findById(user.getId())
+                        .findByUserId(user.getId())
                         .orElseThrow(() ->
                                 new ResourceNotFoundException(
                                         "Adopter profile not found."
                                 )
                         );
 
-        return profileMapper.toAdopterResponse(profile);
+        return profileMapper.toAdopterResponse(profile);}
 
     @Override
     public AdopterProfileResponse updateAdopterProfile(AdopterProfileRequest updatedProfile,Authentication authentication){
         User user=getAuthenticatedUser(authentication);
-        AdopterProfile profile =adopterProfileRepository.findById(user.getId()).orElseThrow(() ->new ResourceNotFoundException( "Adopter profile not found." ));
+        AdopterProfile profile =adopterProfileRepository.findByUserId(user.getId()).orElseThrow(() ->new ResourceNotFoundException( "Adopter profile not found." ));
 
         profileMapper.updateAdopterProfile(profile, updatedProfile);
 
@@ -66,7 +67,7 @@ public class ProfileServiceImpl implements ProfileService {
     public ShelterProfileResponse getShelterProfile (Authentication authentication){
         User user=getAuthenticatedUser(authentication);
 
-        ShelterProfile profile=shelterProfileRepository.findById(user.getId()).orElseThrow(()->
+        ShelterProfile profile=shelterProfileRepository.findByUserId(user.getId()).orElseThrow(()->
                                 new ResourceNotFoundException("Shelter profile not found."));
         return profileMapper.toShelterResponse(profile);
     
@@ -82,7 +83,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         ShelterProfile profile =
                 shelterProfileRepository
-                        .findById(user.getId())
+                        .findByUserId(user.getId())
                         .orElseThrow(() ->
                                 new ResourceNotFoundException(
                                         "Shelter profile not found."
@@ -90,6 +91,10 @@ public class ProfileServiceImpl implements ProfileService {
                         );
 
         profileMapper.updateShelterProfile(profile, request);
+        ShelterProfile savedProfile = shelterProfileRepository.save(profile);
+
+        return profileMapper.toShelterResponse(savedProfile);
+        }
 
     //helper
     private User getAuthenticatedUser(Authentication authentication) {
@@ -107,4 +112,4 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
 
-}}}
+}
