@@ -29,6 +29,5 @@ public class PetResponse {
     private String rescueStory;
     private PetStatus status;
 
-    // 👈 Safe, clean shelter details ONLY (No User object!)
     private ShelterSummary shelter;
 }
