@@ -115,7 +115,15 @@ public class PetController {
             petService.deactivatePet(id, shelterId);
             return ResponseEntity.noContent().build();
         }
-
+    
+    @PutMapping ("/activate/{id}")
+    public ResponseEntity<Void> activatePet(@PathVariable Long id,
+        Authentication authentication)
+    {
+            Long shelterId=extractShelterId(authentication);
+            petService.activatePet(id, shelterId);
+            return ResponseEntity.noContent().build();
+    }
     @PutMapping("/{id}")
     public ResponseEntity<PetResponse>updatePet(@PathVariable Long id,
         @Valid @RequestBody PetRequest petRequest,Authentication authentication)

@@ -99,13 +99,19 @@ public class ApplicationServiceImpl implements ApplicationService{
     public void cancelMyApplication(Long applicationId, Authentication authentication) {
         AdopterProfile adopter = getAuthenticatedAdopter(authentication);
         Application application = applicationRepository.findById(applicationId).orElseThrow(() -> new ResourceNotFoundException("Application not found"));
+        String currentUserEmail = authentication.getName(); // Or user ID depending on JWT setup
+    
+        // Debug point: Print both to your terminal to see why they don't match!
+        // System.out.println("Owner: " + application.getAdopter().getUser().getEmail());
+        // System.out.println("Current: " + currentUserEmail);
+
         if (!application.getAdopter().getId().equals(adopter.getId())) {
             throw new AccessDeniedException("You are not authorized to cancel this application");
         }
         if (application.getStatus() != ApplicationStatus.PENDING) {
             throw new IllegalStateException("You can only cancel pending applications");
         }
-        application.setStatus(ApplicationStatus.CANCELED);
+        application.setStatus(ApplicationStatus.CANCELLED);
         applicationRepository.save(application);
     }
 
@@ -113,7 +119,7 @@ public class ApplicationServiceImpl implements ApplicationService{
     @Override
     public List<ApplicationResponse> getApplicationsForMyPets(Authentication authentication) {
         Long shelterId = getAuthenticatedShelter(authentication).getId();
-        List<Application> applications = applicationRepository.findByPetShelterId(shelterId);
+        List<Application> applications = applicationRepository.findByPetShelterIdAndStatusNot(shelterId,ApplicationStatus.CANCELLED);
         return applications.stream().map(this::mapToResponse).toList();
     }
 
@@ -126,10 +132,10 @@ public class ApplicationServiceImpl implements ApplicationService{
         if (application.getStatus() != ApplicationStatus.PENDING) {
                 throw new IllegalStateException("You can only update pending applications");
             }
-        if(status!=ApplicationStatus.APPROVED && status!=ApplicationStatus.REJECTED){
+        if(status!=ApplicationStatus.ACCEPTED && status!=ApplicationStatus.REJECTED){
             throw new IllegalArgumentException("Invalid status. Only APPROVED or REJECTED are allowed.");
         }
-        if (status == ApplicationStatus.APPROVED) {
+        if (status == ApplicationStatus.ACCEPTED) {
             // Check if the pet is still available for adoption
             if (application.getPet().getStatus() != PetStatus.AVAILABLE) {
                 throw new IllegalStateException("Pet is no longer available for adoption");
@@ -143,6 +149,20 @@ public class ApplicationServiceImpl implements ApplicationService{
         Application updatedApplication = applicationRepository.save(application);
         return mapToResponse(updatedApplication);
     }
+
+    @Override
+    public ApplicationResponse getApplicationById(Long applicationId, Authentication authentication) {
+    Application application = applicationRepository.findById(applicationId).orElseThrow(() -> new ResourceNotFoundException("Application not found"));
+    User authenticatedUser = getAuthenticatedUser(authentication);
+
+    boolean isAdopterOwner = application.getAdopter().getUser().getId().equals(authenticatedUser.getId());
+    boolean isShelterOwner = application.getPet().getShelter().getUser().getId().equals(authenticatedUser.getId());
+
+    if (!isAdopterOwner && !isShelterOwner) {
+        throw new AccessDeniedException("You are not authorized to view this application");
+    }
+    return mapToResponse(application);
+}
 
     // Helper methods
     private AdopterProfile getAuthenticatedAdopter(Authentication authentication) {

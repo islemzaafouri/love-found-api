@@ -86,8 +86,10 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public List<Pet> getPetsBySpecies(PetSpecies species){
-        return petRepo.findBySpecies(species);
+    public List<Pet> getPetsBySpecies(PetSpecies species) {
+    return petRepo.findBySpecies(species).stream()
+        .filter(pet -> PetStatus.AVAILABLE.equals(pet.getStatus()))
+        .toList(); 
     }
 
     @Override
@@ -95,4 +97,14 @@ public class PetServiceImpl implements PetService {
     return petRepo.findByStatus(PetStatus.AVAILABLE);
 }
 
+    @Override
+    public void activatePet (Long petId, Long shelterId) {
+    Pet pet = getPetById(petId);
+    if (!pet.getShelter().getId().equals(shelterId)) {
+        throw new UnauthorizedException("Unauthorized: Shelter does not own this pet");
+    }
+    pet.setStatus(PetStatus.AVAILABLE);
+    petRepo.save(pet);
+
+}
 }

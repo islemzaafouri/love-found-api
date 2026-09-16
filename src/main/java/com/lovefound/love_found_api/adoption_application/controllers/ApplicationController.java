@@ -43,6 +43,13 @@ public class ApplicationController {
         List<ApplicationResponse> applications = applicationService.getMyApplications(authentication);
         return ResponseEntity.ok(applications);
     }
+    @GetMapping("/{applicationId}")
+    public ResponseEntity<ApplicationResponse> getApplicationById(@PathVariable Long applicationId, Authentication
+    authentication) {
+            ApplicationResponse response = applicationService.getApplicationById(applicationId, authentication);
+            return ResponseEntity.ok(response);
+        }
+    
     @PutMapping("/{applicationId}")
     public ResponseEntity<ApplicationResponse>updateMyApplication(@PathVariable Long applicationId, @RequestBody @Valid ApplicationUpdateRequest request, Authentication authentication) {
         ApplicationResponse response = applicationService.updateMyApplication(applicationId, request, authentication);

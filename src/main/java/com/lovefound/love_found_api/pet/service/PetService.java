@@ -17,6 +17,8 @@ public interface PetService {
 
     void deactivatePet(Long petId,Long shelterId );
 
+    void activatePet(Long petId, Long shelterId);
+
     List<Pet> getPetsByShelterId(Long shelterId);
 
     List<Pet> getPetsBySpecies(PetSpecies species);

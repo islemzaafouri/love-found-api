@@ -10,8 +10,9 @@ import com.lovefound.love_found_api.pet.model.entity.Pet;
 import com.lovefound.love_found_api.pet.model.enums.PetStatus;
 
 public interface ApplicationRepo extends JpaRepository<Application,Long> {
-    List<Application> findByStatus(ApplicationStatus status);
+    
     List<Application> findByPetShelterId(Long shelterId);
     Boolean existsByAdopterIdAndPetId(Long adopterId, Long petId);
     List<Application> findByAdopterId(Long id);
+    List<Application> findByPetShelterIdAndStatusNot(Long shelterId, ApplicationStatus status);
 }

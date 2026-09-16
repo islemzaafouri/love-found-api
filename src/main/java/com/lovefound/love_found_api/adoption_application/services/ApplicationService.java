@@ -11,9 +11,7 @@ import com.lovefound.love_found_api.adoption_application.models.enums.Applicatio
 
 public interface ApplicationService {
 
-    // =========================================================
-    // ADOPTER
-    // =========================================================
+    
 
     ApplicationResponse createApplication(
             ApplicationRequest request,
@@ -35,10 +33,13 @@ public interface ApplicationService {
             Authentication authentication
     );
 
+    ApplicationResponse getApplicationById(
+            Long applicationId,
+            Authentication authentication
+    );
 
-    // =========================================================
-    // SHELTER
-    // =========================================================
+
+    
 
     List<ApplicationResponse> getApplicationsForMyPets(
             Authentication authentication

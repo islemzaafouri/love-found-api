@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ApplicationResponse {
-    Long Id;
+    Long id;
     AdopterProfileResponse adopter;
     PetResponse pet;
     String motivation;
