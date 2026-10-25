@@ -22,6 +22,7 @@ import com.lovefound.love_found_api.adoption_application.dto.ApplicationUpdateRe
 import com.lovefound.love_found_api.adoption_application.models.enums.ApplicationStatus;
 import com.lovefound.love_found_api.adoption_application.services.ApplicationService;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -66,6 +67,7 @@ public class ApplicationController {
         List<ApplicationResponse> applications = applicationService.getApplicationsForMyPets(authentication);
         return ResponseEntity.ok(applications);
     }
+    @Transactional 
     @PutMapping("/{applicationId}/status")
     public ResponseEntity<ApplicationResponse> updateApplicationStatus(@PathVariable Long applicationId, @RequestBody ApplicationStatusUpdateRequest request,Authentication authentication) {
         ApplicationResponse response = applicationService.updateApplicationStatus(applicationId,request.getStatus() , authentication);

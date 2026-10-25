@@ -28,6 +28,8 @@ import com.lovefound.love_found_api.profiles.dto.AdopterProfileResponse;
 import com.lovefound.love_found_api.profiles.entities.AdopterProfile;
 import com.lovefound.love_found_api.profiles.entities.ShelterProfile;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ApplicationServiceImpl implements ApplicationService{
     private final ApplicationRepo applicationRepository;
@@ -124,6 +126,7 @@ public class ApplicationServiceImpl implements ApplicationService{
     }
 
     @Override
+    @Transactional 
     public ApplicationResponse updateApplicationStatus(Long applicationId, ApplicationStatus status, Authentication authentication) {
         Application application = applicationRepository.findById(applicationId).orElseThrow(() -> new ResourceNotFoundException("Application not found"));
         if (!application.getPet().getShelter().getId().equals(getAuthenticatedShelter(authentication).getId())) {
@@ -199,6 +202,7 @@ public class ApplicationServiceImpl implements ApplicationService{
         response.setPet(pet);
         response.setMotivation(application.getMotivation());
         response.setStatus(application.getStatus());
+        response.setCreatedAt(application.getCreatedAt());
         return response;
     }
 

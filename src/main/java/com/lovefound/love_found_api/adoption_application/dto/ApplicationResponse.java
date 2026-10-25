@@ -20,6 +20,6 @@ public class ApplicationResponse {
     PetResponse pet;
     String motivation;
     ApplicationStatus status;
-        private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
 }
