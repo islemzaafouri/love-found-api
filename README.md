@@ -75,6 +75,10 @@ Typical request flow:
 
 For the cross-repository component diagram and request flows, see the [LoveFound system architecture](docs/architecture.md).
 
+
+
+For the entity-relationship diagram, table descriptions, and database constraints, see the [database design documentation](docs/database-design.md).
+
 ## Main capabilities
 
 ### Authentication and authorization
