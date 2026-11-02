@@ -71,6 +71,10 @@ Typical request flow:
 3. A repository accesses persisted entities through JPA.
 4. DTOs define the data returned to or accepted from the frontend.
 
+
+
+For the cross-repository component diagram and request flows, see the [LoveFound system architecture](docs/architecture.md).
+
 ## Main capabilities
 
 ### Authentication and authorization
