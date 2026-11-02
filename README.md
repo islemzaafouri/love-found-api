@@ -224,7 +224,7 @@ docker run --rm -p 8080:8080 \
   love-found-api
 ```
 
-The JWT signing configuration must also be supplied according to the application's JWT utility configuration. This repository does not yet include a Docker Compose setup.
+Also provide \`JWT_SECRET\` and \`JWT_EXPIRATION\` when running the container. The signing secret must be kept private and must be at least 32 bytes for the configured HS256 algorithm. This repository does not yet include a Docker Compose setup.
 
 ## Related repository
 
