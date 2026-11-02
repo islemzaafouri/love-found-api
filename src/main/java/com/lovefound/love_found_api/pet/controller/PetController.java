@@ -102,8 +102,6 @@ public class PetController {
         {
             Long shelterId = extractShelterId(authentication);
         Pet createdPet = petService.createPet( shelterId,petRequest);
-        System.out.println("User: " + authentication.getName());
-        System.out.println("Authorities: " + authentication.getAuthorities());
         return ResponseEntity.status(HttpStatus.CREATED).body(petMapper.toResponse(createdPet));
         }
     
