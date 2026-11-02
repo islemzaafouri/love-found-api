@@ -171,7 +171,7 @@ CREATE DATABASE lovefound;
 
 ### 3. Configure database access
 
-Provide the Spring Boot datasource settings for your local MySQL instance using environment variables or a local, uncommitted `application.properties` file.
+Copy `src/main/resources/application-example.properties` to `src/main/resources/application.properties` and adjust it for your local MySQL instance. The real `application.properties` is ignored by Git.
 
 Typical Spring Boot environment variables are:
 
@@ -183,7 +183,7 @@ SPRING_DATASOURCE_PASSWORD
 
 Do not commit real database credentials, JWT signing secrets, or other private configuration.
 
-> The repository does not currently include a committed application configuration file. Configure the datasource and JWT signing settings required by the application before starting it.
+> The example configuration uses Flyway for schema management. Set `JWT_SECRET` to a private random value of at least 32 bytes for HS256. Never commit your real `application.properties` or secret values.
 
 ### 4. Run the API
 
