@@ -57,13 +57,13 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/pets/**").hasRole("SHELTER")
                 .requestMatchers("/api/profile/shelter/**").hasRole("SHELTER")
 
-                .requestMatchers("/api/applications/shelter/**")
-                .hasRole("SHELTER")
+                .requestMatchers("/api/applications/shelter-applications").hasRole("SHELTER")
+                .requestMatchers("/api/applications/shelter/**").hasRole("SHELTER")
                 .requestMatchers(HttpMethod.PUT, "/api/applications/*/status").hasRole("SHELTER")
 
                 // ---------- Adopter ----------
                 .requestMatchers(HttpMethod.POST, "/api/applications/**").hasRole("ADOPTER")
-                .requestMatchers(HttpMethod.PUT, "/api/applications/**").hasRole("ADOPTER") // <-- ADD THIS LINE
+                .requestMatchers(HttpMethod.PUT, "/api/applications/**").hasRole("ADOPTER")
 
                 .requestMatchers("/api/profile/adopter/**").hasRole("ADOPTER")
                 .requestMatchers("/api/applications/my-applications").hasRole("ADOPTER")
